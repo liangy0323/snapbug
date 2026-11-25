@@ -1,0 +1,15 @@
+node_modules
+dist
+coverage
+.turbo
+.rsbuild
+.rstest
+.log
+.env*
+pnpm-lock.yaml
+apps/web/build
+
+# 自动导入与组件声明由构建插件生成并重写，不参与格式化检查
+apps/web/auto-imports.d.ts
+apps/web/components.d.ts
+packages/database/generated/prisma

@@ -1,0 +1,21 @@
+{
+  "$schema": "./workspace.config.schema.json",
+  "schemaVersion": 1,
+  "apps": {
+    "web": {
+      "web": {
+        "path": "apps/web",
+        "packageName": "@repo/web",
+        "localPort": 8081
+      }
+    },
+    "server": {
+      "api": {
+        "path": "apps/api",
+        "packageName": "@repo/api",
+        "localPort": 3000,
+        "healthPath": "/api/health"
+      }
+    }
+  }
+}

@@ -1,0 +1,251 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../generated/prisma"
+  moduleFormat        = "cjs"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum ProjectJoinType {
+  CREATOR
+  ASSIGNED
+  MANUAL
+}
+
+enum BugStatus {
+  OPEN
+  PROGRESS
+  VERIFY
+  CLOSED
+  IGNORED
+}
+
+enum BugPriority {
+  P0
+  P1
+  P2
+}
+
+enum AttachmentType {
+  IMAGE
+  VIDEO
+}
+
+enum ActivityType {
+  CREATED
+  COMMENT
+  STATUS_CHANGED
+  ASSIGNEE_CHANGED
+  PRIORITY_CHANGED
+}
+
+enum NotificationType {
+  BUG_ASSIGNED
+  BUG_REASSIGNED
+  BUG_VERIFY_READY
+  BUG_COMMENTED
+}
+
+model User {
+  id            Int        @id @default(autoincrement())
+  account       String     @unique @db.VarChar(100)
+  passwordHash  String     @map("password_hash") @db.VarChar(255)
+  name          String     @db.VarChar(50)
+  jobTitle      String?    @map("job_title") @db.VarChar(50)
+  avatarColor   String     @default("#1b74ff") @map("avatar_color") @db.VarChar(20)
+  avatarKey     String?    @map("avatar_key") @db.VarChar(255)
+  role          UserRole   @default(MEMBER)
+  status        UserStatus @default(ACTIVE)
+  lastProjectId Int?       @map("last_project_id")
+  createdAt     DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime   @updatedAt @map("updated_at") @db.Timestamptz
+
+  createdProjects Project[]       @relation("ProjectCreator")
+  projectMembers  ProjectMember[]
+  createdBugs     Bug[]           @relation("BugCreator")
+  assignedBugs    Bug[]           @relation("BugAssignee")
+  resolvedBugs    Bug[]           @relation("BugResolver")
+  bugAttachments  BugAttachment[]
+  bugActivities   BugActivity[]
+  receivedNotifs  Notification[]  @relation("NotificationRecipient")
+  triggeredNotifs Notification[]  @relation("NotificationActor")
+  notes           Note[]
+  plans           Plan[]
+
+  @@index([role, status])
+  @@map("users")
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(100)
+  description String?  @db.VarChar(500)
+  creatorId   Int      @map("creator_id")
+  archived    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  creator User            @relation("ProjectCreator", fields: [creatorId], references: [id])
+  members ProjectMember[]
+  bugs    Bug[]
+
+  @@map("projects")
+}
+
+model ProjectMember {
+  id        Int             @id @default(autoincrement())
+  projectId Int             @map("project_id")
+  userId    Int             @map("user_id")
+  joinedVia ProjectJoinType @default(ASSIGNED) @map("joined_via")
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@index([userId])
+  @@map("project_members")
+}
+
+model Bug {
+  id              Int         @id @default(autoincrement())
+  code            String      @unique @db.VarChar(30)
+  projectId       Int         @map("project_id")
+  title           String      @db.VarChar(200)
+  description     String      @db.Text
+  status          BugStatus   @default(OPEN)
+  priority        BugPriority @default(P1)
+  creatorId       Int         @map("creator_id")
+  assigneeId      Int         @map("assignee_id")
+  resolverId      Int?        @map("resolver_id")
+  relatedBugId    Int?        @map("related_bug_id")
+  verifyChecklist Json?       @map("verify_checklist")
+  aiOptimized     Boolean     @default(false) @map("ai_optimized")
+  resolvedAt      DateTime?   @map("resolved_at") @db.Timestamptz
+  closedAt        DateTime?   @map("closed_at") @db.Timestamptz
+  createdAt       DateTime    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime    @updatedAt @map("updated_at") @db.Timestamptz
+
+  project       Project         @relation(fields: [projectId], references: [id])
+  creator       User            @relation("BugCreator", fields: [creatorId], references: [id])
+  assignee      User            @relation("BugAssignee", fields: [assigneeId], references: [id])
+  resolver      User?           @relation("BugResolver", fields: [resolverId], references: [id])
+  relatedBug    Bug?            @relation("BugRelation", fields: [relatedBugId], references: [id], onDelete: SetNull)
+  relatedBugs   Bug[]           @relation("BugRelation")
+  attachments   BugAttachment[]
+  activities    BugActivity[]
+  notifications Notification[]
+  plans         Plan[]
+
+  @@index([projectId, status])
+  @@index([assigneeId, status])
+  @@index([creatorId, status])
+  @@index([resolverId, resolvedAt])
+  @@index([relatedBugId])
+  @@index([createdAt])
+  @@index([closedAt])
+  @@map("bugs")
+}
+
+model BugAttachment {
+  id         Int            @id @default(autoincrement())
+  bugId      Int            @map("bug_id")
+  uploaderId Int            @map("uploader_id")
+  type       AttachmentType
+  objectKey  String         @unique @map("object_key") @db.VarChar(500)
+  fileName   String         @map("file_name") @db.VarChar(255)
+  mimeType   String         @map("mime_type") @db.VarChar(100)
+  fileSize   Int            @map("file_size")
+  createdAt  DateTime       @default(now()) @map("created_at") @db.Timestamptz
+
+  bug      Bug  @relation(fields: [bugId], references: [id], onDelete: Cascade)
+  uploader User @relation(fields: [uploaderId], references: [id])
+
+  @@index([bugId])
+  @@map("bug_attachments")
+}
+
+model BugActivity {
+  id        Int          @id @default(autoincrement())
+  bugId     Int          @map("bug_id")
+  actorId   Int          @map("actor_id")
+  type      ActivityType
+  content   String?      @db.Text
+  meta      Json?
+  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz
+
+  bug   Bug  @relation(fields: [bugId], references: [id], onDelete: Cascade)
+  actor User @relation(fields: [actorId], references: [id])
+
+  @@index([bugId, createdAt])
+  @@index([actorId, type, createdAt])
+  @@index([type, createdAt])
+  @@map("bug_activities")
+}
+
+model Notification {
+  id          Int              @id @default(autoincrement())
+  recipientId Int              @map("recipient_id")
+  actorId     Int              @map("actor_id")
+  bugId       Int              @map("bug_id")
+  type        NotificationType
+  content     String           @db.VarChar(500)
+  isRead      Boolean          @default(false) @map("is_read")
+  readAt      DateTime?        @map("read_at") @db.Timestamptz
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz
+
+  recipient User @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor     User @relation("NotificationActor", fields: [actorId], references: [id])
+  bug       Bug  @relation(fields: [bugId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId, isRead, createdAt(sort: Desc)])
+  @@map("notifications")
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  title     String   @default("") @db.VarChar(200)
+  content   String   @default("") @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, updatedAt(sort: Desc)])
+  @@map("notes")
+}
+
+model Plan {
+  id        Int       @id @default(autoincrement())
+  userId    Int       @map("user_id")
+  planDate  DateTime  @map("plan_date") @db.Date
+  planTime  String?   @map("plan_time") @db.VarChar(10)
+  content   String    @db.VarChar(500)
+  remark    String?   @db.VarChar(500)
+  isDone    Boolean   @default(false) @map("is_done")
+  doneAt    DateTime? @map("done_at") @db.Timestamptz
+  bugId     Int?      @map("bug_id")
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bug  Bug? @relation(fields: [bugId], references: [id], onDelete: SetNull)
+
+  @@index([userId, planDate])
+  @@index([userId, isDone, planDate])
+  @@map("plans")
+}

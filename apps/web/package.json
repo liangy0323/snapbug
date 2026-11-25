@@ -1,0 +1,43 @@
+{
+  "name": "@repo/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev --env-mode development --config build/rsbuild.dev.config.ts",
+    "build": "pnpm build:prod",
+    "build:prod": "rsbuild build --env-mode production --config build/rsbuild.prod.config.ts",
+    "preview": "rsbuild preview --env-mode production --config build/rsbuild.prod.config.ts",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "test": "rstest run",
+    "test:watch": "rstest watch",
+    "clean": "rimraf dist .rsbuild .rstest"
+  },
+  "dependencies": {
+    "@lucide/vue": "catalog:",
+    "@repo/charts": "workspace:*",
+    "@repo/shared": "workspace:*",
+    "axios": "catalog:",
+    "pinia": "catalog:",
+    "pinia-plugin-persistedstate": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "catalog:",
+    "@rsbuild/plugin-image-compress": "catalog:",
+    "@rsbuild/plugin-sass": "catalog:",
+    "@rsbuild/plugin-vue": "catalog:",
+    "@rstest/adapter-rsbuild": "catalog:",
+    "@rstest/core": "catalog:",
+    "@types/js-cookie": "catalog:",
+    "@types/node": "catalog:",
+    "compression-webpack-plugin": "catalog:",
+    "rimraf": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "unplugin-auto-import": "catalog:",
+    "unplugin-vue-components": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

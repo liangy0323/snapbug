@@ -1,0 +1,59 @@
+{
+  "name": "snapbug",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.23.0",
+  "engines": {
+    "node": ">=22.19.0",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:stop": "node scripts/dev.mjs stop",
+    "dev:web": "node scripts/dev.mjs web",
+    "dev:api": "node scripts/dev.mjs api",
+    "build": "turbo run build --ui=stream",
+    "check:architecture": "node scripts/check-architecture.mjs",
+    "typecheck": "turbo run typecheck --ui=stream",
+    "lint": "eslint . --cache --cache-location node_modules/.cache/eslint/ --cache-strategy content",
+    "lint:fix": "eslint . --cache --cache-location node_modules/.cache/eslint/ --cache-strategy content --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "turbo run test --ui=stream",
+    "verify:setup": "node scripts/verify-setup.mjs",
+    "clean": "turbo run clean --ui=stream",
+    "check": "pnpm check:architecture && pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,mjs,cjs,ts,tsx,vue}": [
+      "eslint --fix --cache --cache-location node_modules/.cache/eslint/ --cache-strategy content"
+    ],
+    "**/*.{js,mjs,cjs,ts,tsx,vue,scss,css,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@clack/prompts": "catalog:",
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "@vue/eslint-config-prettier": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-vue": "catalog:",
+    "globals": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "pg": "catalog:",
+    "prettier": "catalog:",
+    "rimraf": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vue-eslint-parser": "catalog:"
+  },
+  "license": "MIT"
+}
