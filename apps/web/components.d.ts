@@ -11,8 +11,20 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    CircleLoading: typeof import('./src/components/base/circle-loading/index.vue')['default']
-    LucideIcon: typeof import('./src/components/base/lucide-icon/index.vue')['default']
+    BaseButton: typeof import('./src/components/base/base-button/index.vue')['default']
+    BaseCircleLoading: typeof import('./src/components/base/base-circle-loading/index.vue')['default']
+    BaseDialog: typeof import('./src/components/base/base-dialog/index.vue')['default']
+    BaseDrawer: typeof import('./src/components/base/base-drawer/index.vue')['default']
+    BaseEmpty: typeof import('./src/components/base/base-empty/index.vue')['default']
+    BaseForm: typeof import('./src/components/base/base-form/index.vue')['default']
+    BaseFormItem: typeof import('./src/components/base/base-form-item/index.vue')['default']
+    BaseIcon: typeof import('./src/components/base/base-icon/index.vue')['default']
+    BaseImagePreview: typeof import('./src/components/base/base-image-preview/index.vue')['default']
+    BaseInput: typeof import('./src/components/base/base-input/index.vue')['default']
+    BaseMarkdownPreview: typeof import('./src/components/base/base-markdown-preview/index.vue')['default']
+    BasePagination: typeof import('./src/components/base/base-pagination/index.vue')['default']
+    BaseSelect: typeof import('./src/components/base/base-select/index.vue')['default']
+    BaseUpload: typeof import('./src/components/base/base-upload/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

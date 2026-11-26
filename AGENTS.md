@@ -110,7 +110,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## 四、规范索引
 
-具体编码规范拆分在 `.rules/` 目录，开发文档在 `docs/` 目录（`background.md`、`tech-stack.md`、`prd.md`、`database.md`、`api.md`、`local-plan.md`）。
+具体编码规范拆分在 `.rules/` 目录，开发文档在 `docs/` 目录（`background.md`、`tech-stack.md`、`prd.md`、`database.md`、`api.md`、`design.md`、`local-plan.md`）。
 
 ---
 

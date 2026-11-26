@@ -1,0 +1,333 @@
+.admin-users-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-users__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.admin-users__title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.admin-users__subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.admin-users__kpis {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-kpi {
+  min-width: 104px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-kpi__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.admin-kpi__value {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+
+  &--success {
+    color: var(--color-success);
+  }
+
+  &--muted {
+    color: var(--color-text-muted);
+  }
+}
+
+.admin-users__card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.admin-users__toolbar {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--color-border-hairline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-users__filters,
+.admin-users__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-users__search {
+  width: 260px;
+}
+
+.admin-users__status-select {
+  width: 136px;
+}
+
+.admin-users__table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+
+  th {
+    text-align: left;
+    padding: 11px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border-hairline);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    color: var(--color-text-primary);
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover td {
+    background-color: var(--color-bg-hover);
+  }
+}
+
+.admin-users-table__ops-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-users-table__ops {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-member-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-member-cell__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-member-cell__name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.admin-users-table__account {
+  font-family: var(--font-family-mono);
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.admin-users-table__title {
+  color: var(--color-text-secondary);
+}
+
+.admin-users-table__date {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.admin-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+
+  &--active {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+  }
+
+  &--disabled {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-muted);
+  }
+}
+
+.admin-status-pill__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background-color: currentcolor;
+}
+
+.admin-users__pagination {
+  padding: 14px 18px;
+  border-top: 1px solid var(--color-border-hairline);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admin-reset-tip {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+
+  code {
+    font-family: var(--font-family-mono);
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-primary);
+  }
+}
+
+.admin-import {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-import__tip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-subtle);
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.admin-import__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-import__summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--color-text-secondary);
+}
+
+.admin-import__badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &--valid {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+  }
+
+  &--error {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+  }
+}
+
+.admin-import__table-wrap {
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+}
+
+.admin-import-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+
+  th,
+  td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-hairline);
+  }
+
+  th {
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.admin-import-table__num,
+.admin-import-table__mono {
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+}
+
+.admin-import-table__ok {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.admin-import-table__err {
+  color: var(--color-danger);
+}

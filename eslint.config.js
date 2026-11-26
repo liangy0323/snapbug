@@ -110,10 +110,10 @@ export default tseslint.config(
     },
   },
   /**
-   * 入口文件显式调用 createApp 等挂载 API
+   * 入口文件与命令式反馈挂载器需要显式调用 createApp / createVNode / render
    */
   {
-    files: ['apps/web/src/index.ts'],
+    files: ['apps/web/src/index.ts', 'apps/web/src/feedback/modules/*/index.ts'],
     rules: {
       'no-restricted-imports': 'off',
     },

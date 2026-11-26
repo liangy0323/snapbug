@@ -19,4 +19,7 @@ coverage
 # Prisma 生成产物
 packages/database/generated/prisma/
 
+# 本地规划类草稿文档不入库
+docs/local-*
+
 *.log

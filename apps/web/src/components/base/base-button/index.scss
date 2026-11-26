@@ -1,0 +1,106 @@
+.base-button {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition:
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &--sm {
+    height: 28px;
+    padding: 0 10px;
+    font-size: var(--font-size-xs);
+    gap: 5px;
+  }
+
+  &--lg {
+    height: 38px;
+    padding: 0 18px;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--primary {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-primary-hover);
+      background-color: var(--color-primary-hover);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  &--soft {
+    border-color: var(--color-primary-line);
+    background-color: var(--color-primary-tint);
+    color: var(--color-primary);
+    font-weight: 600;
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary-tile);
+      color: var(--color-primary);
+    }
+  }
+
+  &--danger {
+    border-color: var(--color-danger);
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-danger);
+      background-color: var(--color-danger);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  &--ghost {
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--color-text-secondary);
+
+    &:hover:not(:disabled) {
+      border-color: transparent;
+      background-color: var(--color-bg-canvas);
+      color: var(--color-primary);
+    }
+  }
+}

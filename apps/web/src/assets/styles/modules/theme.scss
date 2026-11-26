@@ -1,0 +1,130 @@
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --color-primary: var(--palette-blue-500);
+  --color-primary-hover: var(--palette-blue-600);
+  --color-primary-tint: var(--palette-blue-50);
+  --color-primary-tile: var(--palette-blue-100);
+  --color-primary-line: var(--palette-blue-200);
+  --color-primary-focus: rgba(27, 116, 255, 0.12);
+
+  --color-bg-canvas: var(--palette-gray-50);
+  --color-bg-surface: var(--palette-white);
+  --color-bg-elevated: var(--palette-white);
+  --color-bg-subtle: #fafbfc;
+  --color-bg-hover: #fafcff;
+  --color-bg-mask: rgba(15, 23, 42, 0.36);
+  --color-bg-mask-light: rgba(15, 23, 42, 0.22);
+
+  --color-card-border: transparent;
+  --color-border-hairline: var(--palette-gray-100);
+  --color-border-soft: var(--palette-gray-200);
+  --color-border-strong: var(--palette-gray-300);
+
+  --color-text-primary: var(--palette-gray-900);
+  --color-text-secondary: var(--palette-gray-700);
+  --color-text-muted: var(--palette-gray-500);
+  --color-text-subtle: var(--palette-gray-400);
+  --color-text-inverse: var(--palette-white);
+
+  --color-danger: var(--palette-red-500);
+  --color-danger-hover: #d92d2d;
+  --color-danger-bg: var(--palette-red-50);
+  --color-danger-tint: #fffafa;
+  --color-warning: var(--palette-orange-500);
+  --color-warning-bg: var(--palette-orange-50);
+  --color-warning-tint: #fffdf9;
+  --color-success: var(--palette-green-500);
+  --color-success-bg: var(--palette-green-50);
+  --color-mint: var(--palette-mint-400);
+  --color-cyan: var(--palette-cyan-400);
+  --color-purple: var(--palette-purple-600);
+
+  --color-code-bg: #f6f8fa;
+  --color-code-inline-bg: #eef2f7;
+  --color-code-header-bg: #edf1f7;
+  --hljs-text: #24292f;
+  --hljs-comment: #6e7781;
+  --hljs-keyword: #cf222e;
+  --hljs-string: #0a3069;
+  --hljs-number: #0550ae;
+  --hljs-title: #8250df;
+  --hljs-attr: #116329;
+  --hljs-meta: #953800;
+  --hljs-addition-bg: #dafbe1;
+  --hljs-addition-text: #116329;
+  --hljs-deletion-bg: #ffebe9;
+  --hljs-deletion-text: #82071e;
+
+  --login-panel-bg: #fafbff;
+  --login-card-shadow: 0 8px 24px rgba(20, 32, 60, 0.08);
+  --login-illustration-filter: none;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-tint: rgba(59, 130, 246, 0.12);
+  --color-primary-tile: rgba(59, 130, 246, 0.16);
+  --color-primary-line: rgba(59, 130, 246, 0.32);
+  --color-primary-focus: rgba(59, 130, 246, 0.24);
+
+  --color-bg-canvas: #121213;
+  --color-bg-surface: #1b1b1d;
+  --color-bg-elevated: #242427;
+  --color-bg-subtle: #161618;
+  --color-bg-hover: rgba(255, 255, 255, 0.04);
+  --color-bg-mask: rgba(0, 0, 0, 0.65);
+  --color-bg-mask-light: rgba(0, 0, 0, 0.45);
+
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-border-hairline: rgba(255, 255, 255, 0.08);
+  --color-border-soft: rgba(255, 255, 255, 0.14);
+  --color-border-strong: rgba(255, 255, 255, 0.24);
+
+  --color-text-primary: #f0f0f2;
+  --color-text-secondary: #a8a8b0;
+  --color-text-muted: #7a7a82;
+  --color-text-subtle: #56565e;
+  --color-text-inverse: #ffffff;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-danger-bg: rgba(245, 63, 63, 0.16);
+  --color-danger-tint: rgba(245, 63, 63, 0.08);
+  --color-warning: #ff9a2e;
+  --color-warning-bg: rgba(255, 125, 0, 0.16);
+  --color-warning-tint: rgba(255, 125, 0, 0.08);
+  --color-success: #23c343;
+  --color-success-bg: rgba(0, 180, 42, 0.16);
+  --color-mint: #2dd4bf;
+  --color-cyan: #38bdf8;
+  --color-purple: #a78bfa;
+
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.32);
+  --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.52);
+  --shadow-drawer: -8px 0 32px rgba(0, 0, 0, 0.48);
+  --shadow-primary: 0 3px 12px rgba(59, 130, 246, 0.32);
+
+  --color-code-bg: #141416;
+  --color-code-inline-bg: rgba(255, 255, 255, 0.08);
+  --color-code-header-bg: #1f1f22;
+  --hljs-text: #e4e4e7;
+  --hljs-comment: #7a7a82;
+  --hljs-keyword: #ff7b72;
+  --hljs-string: #a5d6ff;
+  --hljs-number: #79c0ff;
+  --hljs-title: #d2a8ff;
+  --hljs-attr: #7ee787;
+  --hljs-meta: #ffa657;
+  --hljs-addition-bg: rgba(46, 160, 67, 0.18);
+  --hljs-addition-text: #aff5b4;
+  --hljs-deletion-bg: rgba(248, 81, 73, 0.18);
+  --hljs-deletion-text: #ffdcd7;
+
+  --login-panel-bg: #121213;
+  --login-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.48);
+  --login-illustration-filter: brightness(0.86) contrast(1.04);
+}

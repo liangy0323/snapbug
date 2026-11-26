@@ -1,0 +1,55 @@
+:root {
+  --palette-blue-500: #1b74ff;
+  --palette-blue-600: #0e62e6;
+  --palette-blue-50: #f2f7ff;
+  --palette-blue-100: #eef5ff;
+  --palette-blue-200: #d6e6ff;
+
+  --palette-gray-50: #f5f6f8;
+  --palette-gray-100: #eff1f5;
+  --palette-gray-200: #e6e9ef;
+  --palette-gray-300: #cbd5e1;
+  --palette-gray-400: #b2b9c4;
+  --palette-gray-500: #86909c;
+  --palette-gray-700: #4e5969;
+  --palette-gray-900: #14181f;
+  --palette-white: #ffffff;
+
+  --palette-red-500: #f53f3f;
+  --palette-red-50: #ffece8;
+  --palette-red-100: #ffd4cc;
+  --palette-orange-500: #ff7d00;
+  --palette-orange-50: #fff3e0;
+  --palette-green-500: #00b42a;
+  --palette-green-50: #e8ffea;
+  --palette-mint-400: #2dd4bf;
+  --palette-cyan-400: #38bdf8;
+  --palette-purple-600: #722ed1;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  --font-family-sans:
+    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Inter', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 15px;
+  --font-size-lg: 17px;
+
+  --shadow-card: 0 1px 4px rgba(15, 23, 42, 0.025);
+  --shadow-popover: 0 10px 30px rgba(15, 23, 42, 0.1);
+  --shadow-drawer: -8px 0 32px rgba(15, 23, 42, 0.1);
+  --shadow-primary: 0 3px 10px rgba(27, 116, 255, 0.24);
+
+  --transition-fast: 0.14s ease;
+  --transition-base: 0.2s ease;
+
+  --z-base: 100;
+  --z-overlay-start: 2000;
+}

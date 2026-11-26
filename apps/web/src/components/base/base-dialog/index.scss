@@ -1,0 +1,109 @@
+@use '@/assets/styles/mixins.scss' as *;
+
+.base-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg-mask);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10vh 16px 24px;
+  overflow-y: auto;
+
+  &--center {
+    align-items: center;
+    padding: 24px 16px;
+  }
+}
+
+.base-dialog {
+  max-width: 92vw;
+  max-height: calc(100vh - 48px);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-popover);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__header {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--color-border-hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  &__close {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-bg-canvas);
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__body {
+    padding: 20px 22px;
+    overflow-y: auto;
+    flex: 1;
+    color: var(--color-text-secondary);
+    @include thin-scrollbar;
+  }
+
+  &__footer {
+    padding: 14px 22px;
+    background-color: transparent;
+    border-top: 1px solid var(--color-border-hairline);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+}
+
+.base-dialog-fade-enter-active,
+.base-dialog-fade-leave-active {
+  transition: opacity var(--transition-base);
+
+  .base-dialog {
+    transition:
+      transform var(--transition-base),
+      opacity var(--transition-base);
+  }
+}
+
+.base-dialog-fade-enter-from,
+.base-dialog-fade-leave-to {
+  opacity: 0;
+
+  .base-dialog {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}

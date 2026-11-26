@@ -1,18 +1,53 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { demoRoutes } from './modules/demo';
+
+import { useAuthStore } from '@/stores';
+
+import { adminRoutes } from './modules/admin';
+import { authRoutes } from './modules/auth';
+import { workspaceRoutes } from './modules/workspace';
 
 /**
- * 统一装配公共布局和各模块路由。History 部署需要为页面地址提供 HTML 回退。
+ * 统一装配应用路由与角色隔离守卫。
  */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    ...authRoutes,
+    ...workspaceRoutes,
+    ...adminRoutes,
     {
-      path: '/',
-      component: () => import('@/layouts/index.vue'),
-      children: demoRoutes,
+      path: '/:pathMatch(.*)*',
+      redirect: '/login',
     },
   ],
+});
+
+router.beforeEach((to) => {
+  const authStore = useAuthStore();
+
+  if (to.name === 'Login') {
+    if (!authStore.isAuthenticated) {
+      return true;
+    }
+    return authStore.isAdmin ? '/admin/users' : '/dashboard';
+  }
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    return {
+      name: 'Login',
+      query: { redirect: to.fullPath },
+    };
+  }
+
+  const requiredRole = to.meta.role;
+  if (requiredRole === 'ADMIN' && !authStore.isAdmin) {
+    return '/dashboard';
+  }
+  if (requiredRole === 'MEMBER' && authStore.isAdmin) {
+    return '/admin/users';
+  }
+
+  return true;
 });
 
 const appTitle = document.title;

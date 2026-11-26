@@ -51,9 +51,11 @@ catalog:
   fastify: 5.12.1
   globals: 17.11.0
   happy-dom: 20.11.6
+  highlight.js: 11.12.0
   husky: 9.1.7
   js-cookie: 3.0.8
   lint-staged: 17.3.0
+  markdown-it-ts: 1.1.8
   pg: 8.23.0
   pinia: 4.0.3
   pinia-plugin-persistedstate: 4.7.1

@@ -18,6 +18,8 @@
     "@repo/charts": "workspace:*",
     "@repo/shared": "workspace:*",
     "axios": "catalog:",
+    "highlight.js": "catalog:",
+    "markdown-it-ts": "catalog:",
     "pinia": "catalog:",
     "pinia-plugin-persistedstate": "catalog:",
     "vue": "catalog:",
