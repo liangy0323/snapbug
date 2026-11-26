@@ -162,3 +162,51 @@ export interface EscapeStackEntry {
    */
   handler: () => void;
 }
+
+/**
+ * 颗粒渐变 WebGL 渲染配置项
+ */
+export interface GrainGradientOptions {
+  /**
+   * 渐变色板（Hex 字符串数组，支持 6 位或 8 位含透明度，最多 7 色）
+   */
+  colors: string[];
+  /**
+   * 动画速度倍率
+   */
+  speed?: number;
+  /**
+   * 缩放比例
+   */
+  scale?: number;
+  /**
+   * 垂直偏移
+   */
+  offsetY?: number;
+  /**
+   * 过渡柔和度
+   */
+  softness?: number;
+  /**
+   * 扭曲强度
+   */
+  intensity?: number;
+  /**
+   * 颗粒噪点强度
+   */
+  noise?: number;
+}
+
+/**
+ * 颗粒渐变 WebGL 实例控制句柄
+ */
+export interface GrainGradientController {
+  /**
+   * 动态更新着色器颜色数组并立即重绘一帧
+   */
+  updateColors: (colors: string[]) => void;
+  /**
+   * 停止动画并释放全部 WebGL 与事件监听资源
+   */
+  dispose: () => void;
+}

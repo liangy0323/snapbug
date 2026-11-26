@@ -2,16 +2,48 @@ import { useTheme } from '@/composables/use-theme';
 import { message } from '@/feedback';
 import { useAuthStore } from '@/stores';
 
+import { buildGrainPalette, readPrimaryColorHex } from '../components/grain-gradient/palette';
+
 import type { FormInstance, FormRules, LoginFormModel } from '@/types';
 
 /**
- * 登录页表单状态与提交编排
+ * 登录页表单状态、提交编排与动态背景配色联动
  */
 export const useLogin = () => {
   const authStore = useAuthStore();
   const route = useRoute();
   const router = useRouter();
   const { isDark, toggleTheme } = useTheme();
+
+  const resolveGradientColors = (): string[] => {
+    const fallback = isDark.value ? '#3b82f6' : '#1b74ff';
+    return buildGrainPalette(readPrimaryColorHex(fallback), isDark.value);
+  };
+
+  const gradientColors = ref<string[]>(resolveGradientColors());
+
+  const syncGradientColors = (): void => {
+    gradientColors.value = resolveGradientColors();
+  };
+
+  watch(isDark, () => {
+    nextTick(syncGradientColors);
+  });
+
+  let themeObserver: MutationObserver | null = null;
+  onMounted(() => {
+    syncGradientColors();
+    themeObserver = new MutationObserver(syncGradientColors);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'style', 'class'],
+    });
+  });
+
+  onBeforeUnmount(() => {
+    themeObserver?.disconnect();
+    themeObserver = null;
+  });
 
   const form = reactive<LoginFormModel>({
     account: authStore.rememberedAccount || '',
@@ -65,6 +97,7 @@ export const useLogin = () => {
   return {
     isDark,
     toggleTheme,
+    gradientColors,
     form,
     rules,
     rememberAccount,
